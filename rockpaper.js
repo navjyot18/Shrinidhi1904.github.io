@@ -13,10 +13,12 @@ main();
 function getComputerChoice(){
 	const choices =['r','p','s'];
 	const randomNumber= Math.floor(Math.random() * 3);
+	console.log(choices[randomNumber]);
 	return choices[randomNumber];
 }
 setTimeout(function() {},3000);
-function convertToWord(){	
+function convertToWord(letter){
+
 	if(letter ==="r") return "ROCK";
 	if(letter ==="p") return "PAPER";
 	return "SCISSORS";
@@ -28,7 +30,7 @@ function win(userChoice,computerChoice){
 	userScore++;
 	userScore_span.innerHTML = userScore;
 	computerScore_span.innerHTML = computerScore;
-	result_p.innerHTML = `${convertToWord(userChoice)}${smallUserWorld}beats ${convertToWord(computerChoice)}${smallCompWorld}.You Win!`;
+	result_p.innerHTML = `${convertToWord(userChoice)}${smallUserworld}beats ${convertToWord(computerChoice)}${smallcompworld}.You Win!`;
 	userChoice_div.classList.add('green-glow');
 	setTimeout(() => userChoice_div.classList.remove('green-glow'),500);
 }
@@ -39,42 +41,45 @@ function lose(userChoice,computerChoice){
 	computerScore++;
 	userScore_span.innerHTML = userScore;
 	computerScore_span.innerHTML = computerScore;
-	result_p.innerHTML = `${convertToWord(userChoice)}${smallUserWorld}loses ${convertToWord(computerChoice)}${smallCompWorld}.You Lost!`;
+	result_p.innerHTML = `${convertToWord(userChoice)}${smallUserworld}loses ${convertToWord(computerChoice)}${smallcompworld}.You Lost!`;
 	userChoice_div.classList.add('red-glow');
-	setTimeout(()=> userChoice_div.classList.remove('green-glow'),500);
+	setTimeout(()=> userChoice_div.classList.remove('red-glow'),500);
 }
 function draw(userChoice,computerChoice){
 	const userChoice_div = document.getElementById(userChoice);
 	const smallUserworld = "user".fontsize(3).sub();
 	const smallcompworld = "comp".fontsize(3).sub();
-	result_p.innerHTML = `${convertToWord(userChoice)}${smallUserWorld}equals${convertToWord(computerChoice)}${smallCompWorld}.Its a draw!`;
+	result_p.innerHTML = `${convertToWord(userChoice)}${smallUserworld}equals${convertToWord(computerChoice)}${smallcompworld}.Its a draw!`;
 	userChoice_div.classList.add('grey-glow');
-	setTimeout(()=> userChoice_div.classList.remove('green-glow'),500);
+	setTimeout(()=> userChoice_div.classList.remove('grey-glow'),500);
 }
 
-function game(userChoice){
+function game(userChoice)
+{
 	const compterChoice = getComputerChoice();
-	switch(userChoice+compterChoice){
+	switch(userChoice+compterChoice)
+	{
 		case "rs":
 		case "pr":
 		case "sp":
-			win(userChoice,ComputerChoice);
+			win(userChoice,compterChoice);
 			break;
 		case "rp":
 		case "ps":
 		case "sr":
-			lose(userChoice,ComputerChoice);
+			lose(userChoice,compterChoice);
 			break;
 		case "rr":
 		case "pp":
 		case "ss":
-			draw(userChoice,ComputerChoice);
+			draw(userChoice,compterChoice);
 			break;	
-}}
+}
+}
 
 function main(){
-	rock_div.addEventListener('Click',()=>game("r"));
-	paper_div.addEventListener('Click',()=>game("p"));
-	scissors_div.addEventListener('Click',()=>game("s"));
+	rock_div.addEventListener('click',()=>game("r"));
+	paper_div.addEventListener('click',()=>game("p"));
+	scissors_div.addEventListener('click',()=>game("s"));
 }
  
